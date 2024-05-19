@@ -10,7 +10,7 @@ clang() {
     echo "Cloning clang"
     if [ ! -d "clang" ]; then
         git clone https://gitlab.com/LeCmnGend/proton-clang -b clang-15 --depth=1 clang
-        KBUILD_COMPILER_STRING="Proton clang 15.0 x sirnewbies"
+        KBUILD_COMPILER_STRING="Soulvibe clang 15.0 x Protonclang.rev1"
         PATH="${PWD}/clang/bin:${PATH}"
     fi
     sudo apt install -y ccache
@@ -22,19 +22,21 @@ DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
+VARIANT=SLMK
+RELEASE_NAME="[Hera]"
 export CACHE
 export KBUILD_COMPILER_STRING
 ARCH=arm64
 export ARCH
-KBUILD_BUILD_HOST="sirnewbies"
+KBUILD_BUILD_HOST="user"
 export KBUILD_BUILD_HOST
-KBUILD_BUILD_USER="noob-server"
+KBUILD_BUILD_USER="soulvibe"
 export KBUILD_BUILD_USER
-DEVICE="Xiaomi Mi A1"
+DEVICE="Redmi Note 9"
 export DEVICE
-CODENAME="tissot"
+CODENAME="merlin"
 export CODENAME
-DEFCONFIG="defconfig xiaomi-tissot.config"
+DEFCONFIG="merlin_defconfig"
 export DEFCONFIG
 COMMIT_HASH=$(git rev-parse --short HEAD)
 export COMMIT_HASH
@@ -66,7 +68,7 @@ tgs() {
 sendinfo() {
     tg "
 • sirCompiler Action •
-*Building on*: \`Github actions\`
+*Building on*: \`Soulvibe Server\`
 *Date*: \`${DATE}\`
 *Device*: \`${DEVICE} (${CODENAME})\`
 *Branch*: \`$(git rev-parse --abbrev-ref HEAD)\`
@@ -122,7 +124,7 @@ compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Another-Kernel-"${BRANCH}"-"${CODENAME}"-"${DATE}".zip ./*
+    zip -r9 Paradox:"${RELEASE_NAME}-"${VARIANT}"-"${CODENAME}"-"${DATE}".zip ./*
     cd ..
 }
 
