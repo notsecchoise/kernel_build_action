@@ -9,8 +9,8 @@ clang() {
     rm -rf clang
     echo "Cloning clang"
     if [ ! -d "clang" ]; then
-        git clone https://gitlab.com/LeCmnGend/proton-clang -b clang-15 --depth=1 clang
-        KBUILD_COMPILER_STRING="Soulvibe clang 15.0.0xGCC release.rev1"
+        git clone -q https://gitlab.com/PixelOS-Devices/playgroundtc.git --depth=1 -b 17 clang
+        KBUILD_COMPILER_STRING="Cosmic clang 17.0"
         PATH="${PWD}/clang/bin:${PATH}"
     fi
     sudo apt install -y ccache
@@ -18,21 +18,22 @@ clang() {
 }
 
 IMAGE=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
+IMAGE2=$(pwd)/out/arch/arm64/boot/dtbo.img
 DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
-RELEASE_NAME="[Zeus]"
-VARIANT=ALMK
+RELEASE_VER=ALMK
+export RELEASE_VER
 export CACHE
 export KBUILD_COMPILER_STRING
 ARCH=arm64
 export ARCH
 KBUILD_BUILD_HOST="user"
 export KBUILD_BUILD_HOST
-KBUILD_BUILD_USER="soulvibe"
+KBUILD_BUILD_USER="soulvibe-atlassian"
 export KBUILD_BUILD_USER
-DEVICE="Xiaomi Redmi Note 9"
+DEVICE="Redmi Note 9"
 export DEVICE
 CODENAME="merlin"
 export CODENAME
@@ -42,7 +43,7 @@ COMMIT_HASH=$(git rev-parse --short HEAD)
 export COMMIT_HASH
 PROCS=$(nproc --all)
 export PROCS
-STATUS=STABLE
+STATUS=TEST
 export STATUS
 source "${HOME}"/.bashrc && source "${HOME}"/.profile
 if [ $CACHE = 1 ]; then
@@ -103,28 +104,35 @@ compile() {
         rm -rf out && mkdir -p out
     fi
 
-    ./update_ksu.sh
-
     make O=out ARCH="${ARCH}" "${DEFCONFIG}"
     make -j"${PROCS}" O=out \
-        ARCH=$ARCH \
-        CC="clang" \
+        ARCH=arm64 \
         LLVM=1 \
+        LLVM_IAS=1 \
+        AR=llvm-ar \
+        NM=llvm-nm \
+        LD=ld.lld \
+        OBJCOPY=llvm-objcopy \
+        OBJDUMP=llvm-objdump \
+        STRIP=llvm-strip \
+        CC=clang \
         CROSS_COMPILE=aarch64-linux-gnu- \
-        CROSS_COMPILE_ARM32=arm-linux-gnueabi-
+        CROSS_COMPILE_ARM32=arm-linux-gnueabi
 
     if ! [ -a "$IMAGE" ]; then
         finderr
         exit 1
     fi
 
-    git clone --depth=1 https://github.com/Soulvibe-Stuff/Anykernel3.git AnyKernel -b merlinx
+    git clone --depth=1 -b master https://github.com/Soulvibe-Stuff/Anykernel3.git -b lancelot AnyKernel
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
+    cp out/arch/arm64/boot/dtbo.img AnyKernel
+    cp out/arch/arm64/boot/dtb.img AnyKernel
 }
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Paradox:"${RELEASE_NAME}"${VARIANT}"-"${CODENAME}"-"${DATE}".zip ./*
+    zip -r9 ParadoX:[Zeus]-"${RELEASE_VER}"-"${CODENAME}"-"${DATE}".zip ./*
     cd ..
 }
 
