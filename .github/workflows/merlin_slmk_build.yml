@@ -48,16 +48,16 @@ jobs:
       - name: Compiling
         run: |
           if [ "${DEVICE}" = "merlin-almk" ]; then
-            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/tissot_build_script.sh
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/merlin_almk_build_script.sh
             bash merlin_almk_build_script.sh
           elif [ "${DEVICE}" = "merlin-slmk" ]; then
-            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/tissot-mainline_build_script.sh
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/merlin_slmk_build_script.sh
             bash merlin_slmk_build_script.sh
           elif [ "${DEVICE}" = "lancelot-almk" ]; then 
-            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/topaz_build_script.sh
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/lancelot_almk_build_script.sh
             bash lancelot_almk_build_script.sh
           elif [ "${DEVICE}" = "lancelot-slmk" ]; then
-            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/sweet_build_script.sh
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/lancelot_slmk_build_script.sh
             bash lancelot_slmk_build_script.sh
           else
             echo "Device not supported yet"
