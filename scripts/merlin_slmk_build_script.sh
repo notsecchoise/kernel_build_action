@@ -67,7 +67,7 @@ tgs() {
 # Send Build Info
 sendinfo() {
     tg "
-• sirCompiler Action •
+• SOULVIBE BUILDER BOT •
 *Building on*: \`Soulvibe Server\`
 *Date*: \`${DATE}\`
 *Device*: \`${DEVICE} (${CODENAME})\`
@@ -118,7 +118,7 @@ compile() {
         exit 1
     fi
 
-    git clone --depth=1 https://github.com/sirnewbies/Anykernel3.git AnyKernel -b tissot
+    git clone --depth=1 https://github.com/Soulvibe-Stuff/Anykernel3.git AnyKernel -b merlinx
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
 }
 # Zipping
