@@ -24,7 +24,7 @@ START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
 TYPE_BUILD=SLMK
-VARIANT=[Hera]
+VARIANT="[Hera]"
 export CACHE
 export KBUILD_COMPILER_STRING
 ARCH=arm64
