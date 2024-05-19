@@ -10,7 +10,7 @@ clang() {
     echo "Cloning clang"
     if [ ! -d "clang" ]; then
         git clone -q https://gitlab.com/PixelOS-Devices/playgroundtc.git --depth=1 -b 17 clang
-        KBUILD_COMPILER_STRING="Soulvibe clang 17.0xRev1"
+        KBUILD_COMPILER_STRING="Cosmic clang 17.0"
         PATH="${PWD}/clang/bin:${PATH}"
     fi
     sudo apt install -y ccache
@@ -23,17 +23,17 @@ DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
-TYPE_BUILD=SLMK
-VARIANT="[Hera]"
+RELEASE_VER=SLMK
+export RELEASE_VER
 export CACHE
 export KBUILD_COMPILER_STRING
 ARCH=arm64
 export ARCH
 KBUILD_BUILD_HOST="user"
 export KBUILD_BUILD_HOST
-KBUILD_BUILD_USER="soulvibe"
+KBUILD_BUILD_USER="soulvibe-atlassian"
 export KBUILD_BUILD_USER
-DEVICE="Xiaomi Redmi 9"
+DEVICE="Redmi 9"
 export DEVICE
 CODENAME="lancelot"
 export CODENAME
@@ -104,8 +104,6 @@ compile() {
         rm -rf out && mkdir -p out
     fi
 
-    ./update_ksu.sh
-
     make O=out ARCH="${ARCH}" "${DEFCONFIG}"
     make -j"${PROCS}" O=out \
         ARCH=arm64 \
@@ -134,7 +132,7 @@ compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 ParadoX:"${VARIANT}-"${TYPE_BUILD}"-"${CODENAME}"-"${DATE}".zip ./*
+    zip -r9 ParadoX:[Hera]-"${RELEASE_VER}"-"${CODENAME}"-"${DATE}".zip ./*
     cd ..
 }
 
