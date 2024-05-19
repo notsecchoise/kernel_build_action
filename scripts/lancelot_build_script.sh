@@ -10,7 +10,7 @@ clang() {
     echo "Cloning clang"
     if [ ! -d "clang" ]; then
         git clone -q https://gitlab.com/PixelOS-Devices/playgroundtc.git --depth=1 -b 17 clang
-        KBUILD_COMPILER_STRING="Cosmic clang 17.0"
+        KBUILD_COMPILER_STRING="Soulvibe clang 17.0xRev1"
         PATH="${PWD}/clang/bin:${PATH}"
     fi
     sudo apt install -y ccache
@@ -23,19 +23,21 @@ DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
+TYPE_BUILD=SLMK
+VARIANT=[Hera]
 export CACHE
 export KBUILD_COMPILER_STRING
 ARCH=arm64
 export ARCH
-KBUILD_BUILD_HOST="sirnewbies"
+KBUILD_BUILD_HOST="user"
 export KBUILD_BUILD_HOST
-KBUILD_BUILD_USER="noob-server"
+KBUILD_BUILD_USER="soulvibe-server"
 export KBUILD_BUILD_USER
-DEVICE="Redmi Note 10 Pro"
+DEVICE="Xiaomi Redmi 9"
 export DEVICE
-CODENAME="sweet"
+CODENAME="lancelot"
 export CODENAME
-DEFCONFIG="vendor/sweet_user_defconfig"
+DEFCONFIG="lancelot_defconfig"
 export DEFCONFIG
 COMMIT_HASH=$(git rev-parse --short HEAD)
 export COMMIT_HASH
@@ -66,7 +68,7 @@ tgs() {
 # Send Build Info
 sendinfo() {
     tg "
-• sirCompiler Action •
+• Soulvibe Builder •
 *Building on*: \`Github actions\`
 *Date*: \`${DATE}\`
 *Device*: \`${DEVICE} (${CODENAME})\`
@@ -132,7 +134,7 @@ compile() {
 # Zipping
 zipping() {
     cd AnyKernel || exit 1
-    zip -r9 Test-Build-Kernel-"${BRANCH}"-"${CODENAME}"-"${DATE}".zip ./*
+    zip -r9 ParadoX:"${VARIANT}-"${TYPE_BUILD}"-"${CODENAME}"-"${DATE}".zip ./*
     cd ..
 }
 
