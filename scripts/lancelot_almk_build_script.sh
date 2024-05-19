@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
 
+# Konfigurasikan 
+git config --global user.name "user.build"
+          git config --global user.email "user@soulvibe.atlassian.net"
+          df -h
+          ld --version
+          gcc -v
+          ar --version
+          sudo apt update
+          sudo apt install -y bc bison build-essential ccache curl flex glibc-source g++-multilib gcc-multilib binutils-aarch64-linux-gnu git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-gtk3-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev python2 tmate ssh neofetch
+          neofetch
+
 # Dependencies
-rm -rf kernel
-git clone $REPO -b $BRANCH kernel 
-cd kernel
+if [ ! -d "kernel" ]; then # Cek apakah folder "kernel" sudah ada
+  git clone https://github.com/Soulvibe-Stuff/android_kernel_xiaomi_mt6768 -b Paradox-ALMK kernel
+fi
+cd kernel 
 
 clang() {
-    rm -rf clang
     echo "Cloning clang"
-    if [ ! -d "clang" ]; then
+    if [ ! -d "clang" ]; then # Cek apakah folder "kernel" sudah ada
         git clone -q https://gitlab.com/PixelOS-Devices/playgroundtc.git --depth=1 -b 17 clang
         KBUILD_COMPILER_STRING="Cosmic clang 17.0"
         PATH="${PWD}/clang/bin:${PATH}"
@@ -23,6 +34,10 @@ DATE=$(date +"%Y%m%d-%H%M")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
 CACHE=1
+token=6410284454:AAFHrE_XZtikh0v8L7IoDVr1RAMuno3LjeI
+chat_id=-1002088104319
+export token
+export chat_id
 RELEASE_VER=ALMK
 export RELEASE_VER
 export CACHE
@@ -45,8 +60,8 @@ PROCS=$(nproc --all)
 export PROCS
 STATUS=TEST
 export STATUS
-source "${HOME}"/.bashrc && source "${HOME}"/.profile
-if [ $CACHE = 1 ]; then
+source "$HOME"/.bashrc && source "$HOME"/.profile
+if [[ $CACHE -eq 1 ]]; then
     ccache -M 100G
     export USE_CCACHE=1
 fi
@@ -69,6 +84,7 @@ tgs() {
 sendinfo() {
     tg "
 • SOULVIBE BUILDER BOT •
+
 *Building on*: \`Soulvibe Server\`
 *Date*: \`${DATE}\`
 *Device*: \`${DEVICE} (${CODENAME})\`
@@ -125,9 +141,9 @@ compile() {
     fi
 
     git clone --depth=1 -b master https://github.com/Soulvibe-Stuff/Anykernel3.git -b lancelot AnyKernel
-    cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
-    cp out/arch/arm64/boot/dtbo.img AnyKernel
-    cp out/arch/arm64/boot/dtb.img AnyKernel
+    cp $(pwd)/out/arch/arm64/boot/Image.gz-dtb AnyKernel
+    cp $(pwd/out/arch/arm64/boot/dtbo.img AnyKernel
+    cp $(pwd)out/arch/arm64/boot/dtb.img AnyKernel
 }
 # Zipping
 zipping() {
