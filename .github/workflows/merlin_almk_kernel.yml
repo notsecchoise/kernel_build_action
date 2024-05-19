@@ -1,4 +1,4 @@
-name: Build Kernel
+name: Build Merlin ALMK Kernel
 
 on:
   workflow_dispatch:
@@ -22,12 +22,11 @@ on:
 
 env:
   TZ: Asia/Jakarta
-  DEVICE: ${{ github.event.inputs.device }}
-  REPO: ${{ github.event.inputs.repo }}
-  BRANCH: ${{ github.event.inputs.branch }}
-  GKI: ${{ github.event.inputs.gki }}
-  token: ${{ github.event.inputs.token }}
-  chat_id: ${{ github.event.inputs.chat_id }}
+  DEVICE: merlin-almk
+  REPO: https://github.com/Soulvibe-Stuff/android_kernrl_xiaomi_mt6768.git
+  BRANCH: Paradox-ALMK
+  token: 6410284454:AAFHrE_XZtikh0v8L7IoDVr1RAMuno3LjeI
+  chat_id: -1002088104319
 
 jobs:
   kernel-build:
@@ -36,8 +35,8 @@ jobs:
     steps:
       - name: Initializing environment
         run: |
-          git config --global user.name "sirnewbies"
-          git config --global user.email "yusromi04@gmail.com"
+          git config --global user.name "soulvibe-team"
+          git config --global user.email "user@soulvibe.atlassian.net"
           df -h
           ld --version
           gcc -v
@@ -48,18 +47,18 @@ jobs:
 
       - name: Compiling
         run: |
-          if [ "${DEVICE}" = "tissot" ]; then
-            wget https://raw.githubusercontent.com/sirnewbies/kernel_build_action/main/scripts/tissot_build_script.sh
-            bash tissot_build_script.sh
-          elif [ "${DEVICE}" = "tissot-mainline" ]; then
-            wget https://raw.githubusercontent.com/sirnewbies/kernel_build_action/main/scripts/tissot-mainline_build_script.sh
-            bash tissot-mainline_build_script.sh
-          elif [ "${DEVICE}" = "topaz" ]; then 
-            wget https://raw.githubusercontent.com/sirnewbies/kernel_build_action/main/scripts/topaz_build_script.sh
-            bash topaz_build_script.sh
-          elif [ "${DEVICE}" = "sweet" ]; then
-            wget https://raw.githubusercontent.com/sirnewbies/kernel_build_action/main/scripts/sweet_build_script.sh
-            bash sweet_build_script.sh
+          if [ "${DEVICE}" = "merlin-almk" ]; then
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/tissot_build_script.sh
+            bash merlin_almk_build_script.sh
+          elif [ "${DEVICE}" = "merlin-slmk" ]; then
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/tissot-mainline_build_script.sh
+            bash merlin_slmk_build_script.sh
+          elif [ "${DEVICE}" = "lancelot-almk" ]; then 
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/topaz_build_script.sh
+            bash lancelot_almk_build_script.sh
+          elif [ "${DEVICE}" = "lancelot-slmk" ]; then
+            wget https://raw.githubusercontent.com/notsecchoise/kernel_build_action/main/scripts/sweet_build_script.sh
+            bash lancelot_slmk_build_script.sh
           else
             echo "Device not supported yet"
           fi
