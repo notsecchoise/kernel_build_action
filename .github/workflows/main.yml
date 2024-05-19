@@ -8,7 +8,7 @@ on:
           required: true
       repo:
           description: 'Kernel source link (dont include . git at the end)'
-          required: true
+          required: false
       branch:
           description: 'Kernel source branch'
           required: true
@@ -23,7 +23,7 @@ on:
 env:
   TZ: Asia/Jakarta
   DEVICE: ${{ github.event.inputs.device }}
-  REPO: ${{ github.event.inputs.repo }}
+  REPO: https://github.com/Soulvibe-Stuff/android_kernel_xiaomi_mt6768
   BRANCH: ${{ github.event.inputs.branch }}
   token: ${{ github.event.inputs.token }}
   chat_id: ${{ github.event.inputs.chat_id }}
