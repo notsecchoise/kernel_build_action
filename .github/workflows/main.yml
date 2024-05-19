@@ -6,9 +6,6 @@ on:
       device:
           description: 'device codename (e.g lancelot-slmk, lancelot-almk, merlin-almk, and merlin-slmk)'
           required: true
-      repo:
-          description: 'Kernel source link (dont include . git at the end)'
-          required: false
       branch:
           description: 'Kernel source branch'
           required: true
