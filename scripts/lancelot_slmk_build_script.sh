@@ -31,7 +31,7 @@ ARCH=arm64
 export ARCH
 KBUILD_BUILD_HOST="user"
 export KBUILD_BUILD_HOST
-KBUILD_BUILD_USER="soulvibe-server"
+KBUILD_BUILD_USER="soulvibe"
 export KBUILD_BUILD_USER
 DEVICE="Xiaomi Redmi 9"
 export DEVICE
