@@ -124,7 +124,7 @@ compile() {
         exit 1
     fi
 
-    git clone --depth=1 -b master https://github.com/Soulvibe-Stuff/Anykernel3.git -b lancelot AnyKernel
+    git clone --depth=1 -b master https://github.com/Soulvibe-Stuff/Anykernel3.git -b merlinx AnyKernel
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
     cp out/arch/arm64/boot/dtbo.img AnyKernel
     cp out/arch/arm64/boot/dtb.img AnyKernel
