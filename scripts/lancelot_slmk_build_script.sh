@@ -68,8 +68,8 @@ tgs() {
 # Send Build Info
 sendinfo() {
     tg "
-• Soulvibe Builder •
-*Building on*: \`Github actions\`
+• SOULVIBE BUILDER BOT •
+*Building on*: \`Soulvibe Server\`
 *Date*: \`${DATE}\`
 *Device*: \`${DEVICE} (${CODENAME})\`
 *Branch*: \`$(git rev-parse --abbrev-ref HEAD)\`
@@ -126,7 +126,7 @@ compile() {
         exit 1
     fi
 
-    git clone --depth=1 -b master https://github.com/RooGhz720/Anykernel3.git AnyKernel
+    git clone --depth=1 -b master https://github.com/Soulvibe-Stuff/Anykernel3.git -b lancelot AnyKernel
     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
     cp out/arch/arm64/boot/dtbo.img AnyKernel
     cp out/arch/arm64/boot/dtb.img AnyKernel
