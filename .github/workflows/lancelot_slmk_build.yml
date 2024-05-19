@@ -1,4 +1,4 @@
-name: Build lancelot ALMK Kernel
+name: Build lancelot SLMK Kernel
 
 on:
   workflow_dispatch:
